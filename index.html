@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prototipo AR - Proporción pectoral mayor y caja torácica</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/GLTFLoader.js"></script>
+  </head>
+  <body>
+    <div id="hud" class="hud">
+      <h1>Prototipo AR Anatómico</h1>
+      <p>
+        Coloca <strong>HIRO</strong> en la parte superior del pecho y
+        <strong>KANJI</strong> en la parte inferior.
+      </p>
+
+      <div class="controls">
+        <button data-view="bones">Solo huesos</button>
+        <button data-view="muscle">Solo pectoral mayor</button>
+        <button data-view="both" class="active">Superpuestos</button>
+      </div>
+
+      <div class="controls">
+        <button id="rotate-left">↺ Rotar</button>
+        <button id="rotate-right">Rotar ↻</button>
+        <button id="zoom-in">Zoom +</button>
+        <button id="zoom-out">Zoom -</button>
+        <button id="reset-view">Reset vista</button>
+      </div>
+
+      <pre id="perf-panel">Inicializando métricas...</pre>
+    </div>
+
+    <a-scene
+      id="ar-scene"
+      embedded
+      vr-mode-ui="enabled: false"
+      renderer="antialias: true; alpha: true; logarithmicDepthBuffer: true"
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false"
+    >
+      <a-marker id="marker-top" preset="hiro"></a-marker>
+      <a-marker id="marker-bottom" preset="kanji"></a-marker>
+
+      <a-entity id="anatomy-root"></a-entity>
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
